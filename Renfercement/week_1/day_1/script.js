@@ -224,7 +224,7 @@ function rotate(tableau, n) {
 // -------------------------Exercice I3 -- Aplatisseur
 let arr = [1, [2, 3], [4, [5, 6]]];
 
-function flatten(tableau) {
+function flatten(tableau){
     return tableau.flat(Infinity);
 }
 
