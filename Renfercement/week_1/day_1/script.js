@@ -224,11 +224,28 @@ function rotate(tableau, n) {
 // -------------------------Exercice I3 -- Aplatisseur
 let arr = [1, [2, 3], [4, [5, 6]]];
 
-function flatten(tableau){
-    return tableau.flat(Infinity);
+// function flatten(tableau){
+//     return tableau.flat(Infinity);
+// }
+
+function flatten(tableau) {
+    let flattend = [];
+
+    for (item of tableau) {
+        if (Array.isArray(item)) {
+            // flattend = flattend.concat(flatten(item));
+
+            flattend = [...flattend , ...flatten(item)];
+        }
+        else {
+            flattend.push(item);
+        }
+    }
+    return flattend;
 }
 
-// console.log(flatten(arr));
+
+console.log(flatten(arr));
 // ----------------------------Exercice I4 -- Intersection et Difference Intermediaire 
 let arr1 = [1, 2, 3, 4];
 let arr2 = [2, 4, 6];
