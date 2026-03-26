@@ -144,3 +144,21 @@ function supprimerProduit(catalogue, id){
 }
 
 // console.log(supprimerProduit(catalogue , 2));
+
+// ----------------------- Exercice I1 -- Fusionner des objets sans écrasement Intermédiaire 20 min
+
+
+function fusionProfonde(obj1, obj2)
+{
+    let resultat = {...obj1};
+
+    for(let key in obj2)
+    {
+        let valuer = obj2[key];
+
+        if(key in resultat)
+        {
+            let valeur1 = resultat[key];
+        }
+    }
+}
