@@ -1,3 +1,4 @@
+<!-- ✏ Exercice 2 — Classe Compte bancaire — Semi-autonome (30 min) -->
 <?php
 
 class CompteBancaire

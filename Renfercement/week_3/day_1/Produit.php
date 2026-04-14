@@ -1,3 +1,4 @@
+<!-- ✏ Exercice 1 — Classe Produit — Guidé (30 min) -->
 <?php
 
 class Produit
