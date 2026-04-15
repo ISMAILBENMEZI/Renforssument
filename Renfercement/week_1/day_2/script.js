@@ -118,8 +118,7 @@ let ct = ajouterProduit(catalogue, produit)
 
 // -------------
 
-function rechercherParNom(catalogue, terme)
-{
+function rechercherParNom(catalogue, terme) {
     let find = catalogue.filter(m => m.nom.toLowerCase().includes(terme.toLowerCase()));
     return find;
 }
@@ -128,9 +127,8 @@ function rechercherParNom(catalogue, terme)
 
 // -------------
 
-function modifierPrix(catalogue, id, nouveauPrix)
-{
-    let nouveau = catalogue.map(m => m.id === id ?{...m , prix:nouveauPrix}: m);
+function modifierPrix(catalogue, id, nouveauPrix) {
+    let nouveau = catalogue.map(m => m.id === id ? { ...m, prix: nouveauPrix } : m);
     return nouveau;
 }
 
@@ -139,7 +137,7 @@ function modifierPrix(catalogue, id, nouveauPrix)
 // --------------
 
 
-function supprimerProduit(catalogue, id){
+function supprimerProduit(catalogue, id) {
     return catalogue.filter(item => item.id !== id);
 }
 
@@ -148,17 +146,98 @@ function supprimerProduit(catalogue, id){
 // ----------------------- Exercice I1 -- Fusionner des objets sans écrasement Intermédiaire 20 min
 
 
-function fusionProfonde(obj1, obj2)
-{
-    let resultat = {...obj1};
+function fusionProfonde(obj1, obj2) {
+    let resultat = { ...obj1 };
 
-    for(let key in obj2)
-    {
+    for (let key in obj2) {
         let valuer = obj2[key];
 
-        if(key in resultat)
-        {
+        if (key in resultat) {
             let valeur1 = resultat[key];
         }
     }
 }
+
+// ----------------------- Exercies 00 
+const flotte = [
+    { id: 1, marque: "Toyota", modele: "Yaris", cat: "citadine", prix_jour: 35, km: 42000, note: 4.2, disponible: true },
+    { id: 2, marque: "Toyota", modele: "Corolla", cat: "berline", prix_jour: 55, km: 28000, note: 4.6, disponible: true },
+    { id: 3, marque: "Renault", modele: "Clio", cat: "citadine", prix_jour: 30, km: 75000, note: 3.8, disponible: false },
+    { id: 4, marque: "Renault", modele: "Megane", cat: "berline", prix_jour: 50, km: 15000, note: 4.8, disponible: true },
+    { id: 5, marque: "Peugeot", modele: "208", cat: "citadine", prix_jour: 32, km: 60000, note: 4.0, disponible: true },
+    { id: 6, marque: "Peugeot", modele: "3008", cat: "SUV", prix_jour: 80, km: 22000, note: 4.7, disponible: true },
+    { id: 7, marque: "BMW", modele: "Serie 3", cat: "berline", prix_jour: 110, km: 8000, note: 4.9, disponible: true },
+    { id: 8, marque: "BMW", modele: "X3", cat: "SUV", prix_jour: 130, km: 5000, note: 4.8, disponible: false },
+    { id: 9, marque: "Ford", modele: "Kuga", cat: "SUV", prix_jour: 75, km: 38000, note: 4.3, disponible: true },
+    { id: 10, marque: "Ford", modele: "Fiesta", cat: "citadine", prix_jour: 28, km: 90000, note: 3.6, disponible: true },
+    { id: 11, marque: "Tesla", modele: "Model 3", cat: "berline", prix_jour: 95, km: 12000, note: 4.9, disponible: true },
+    { id: 12, marque: "Tesla", modele: "Model Y", cat: "SUV", prix_jour: 115, km: 6000, note: 5.0, disponible: true },
+    { id: 13, marque: "Volkswagen", modele: "Golf", cat: "berline", prix_jour: 58, km: 45000, note: 4.1, disponible: false },
+    { id: 14, marque: "Volkswagen", modele: "Tiguan", cat: "SUV", prix_jour: 88, km: 19000, note: 4.5, disponible: true },
+    { id: 15, marque: "Hyundai", modele: "Tucson", cat: "SUV", prix_jour: 70, km: 31000, note: 4.4, disponible: true },
+];
+
+
+// Q:1
+function filterArray(flotte) {
+    const NewArray = flotte.filter(car => car.disponible === true)
+        .map(car => {
+
+            const prix_5_jour = car.prix_jour * 5;
+            const remise = car.km > 40000 ? 8 : 0;
+            const prixFinal = prix_5_jour - (prix_5_jour * remise / 100);
+
+            return {
+                model: car.model,
+                prix_5_jour: prix_5_jour,
+                remise: remise + '%',
+                prixFinal: prixFinal
+            }
+
+        });
+    return NewArray;
+}
+
+// console.log(filterArray(flotte))
+
+// ----------------------------------------
+// Q:2
+
+function groupCarByCategory(flotte) {
+    let result = {};
+    flotte.forEach(car => {
+        const cat = car.cat;
+
+        if (!result[cat]) {
+            result[cat] = {
+                nbTotal: 0,
+                nbDisponibles: 0,
+                prixTotal: 0,
+                noteTotal: 0
+            };
+
+            result[cat].nbTotal += 1;
+
+            if (car.disponible)
+                result[cat].nbDisponibles += 1;
+
+            result[cat].prixTotal += car.prix_jour;
+
+            result[cat].prixTotal += car.prix_jour;
+
+            result[cat].noteTotal += car.note;
+        }
+    });
+
+    for (let cat in result) {
+        result[cat].prixMoyen = result[cat].prixTotal / result[cat].nbTotal;
+
+        result[cat].noteMoyen = Math.round((result[cat].noteTotal) / result[cat].nbTotal * 10) / 10;
+
+        result[cat].tauxDispo = (result[cat].nbDisponibles / result[cat].nbTotal) * 100;
+    }
+
+    return result;
+}
+
+console.log(groupCarByCategory(flotte));
