@@ -1,6 +1,8 @@
 <?php
 
-abstract class Document
+require_once "Empruntable.php";
+
+abstract class Document implements Empruntable
 {
     protected $titre;
     protected $auteur;
@@ -30,7 +32,12 @@ abstract class Document
         return $this->prix;
     }
 
-    abstract public function estDisponible();
-    abstract public function emprunter();
+    public function estDisponible(){
+        return $this->disponible;
+    }
+
+    public function emprunter(){
+        $this->disponible = false;
+    }
     abstract public function getDescription();
 }

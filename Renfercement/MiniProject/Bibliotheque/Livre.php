@@ -21,21 +21,11 @@ class Livre extends Document
     {
         return "Livre: " . $this->titre . " --- " . $this->auteur . " Prix: " . $this->prix . " ISBN: " . $this->isbn;
     }
-
-    public function estDisponible()
-    {
-        return $this->disponible;
-    }
-
-    public function emprunter()
-    {
-        $this->disponible = false;
-    }
 }
 
 
 $l1 = new Livre('1984', 'Orwell', 12.50, '978-2070368228');
 
-echo $l1->getDescription()."\n";
+echo $l1->getDescription() . "\n";
 
 var_dump($l1->estDisponible());

@@ -18,16 +18,6 @@ class Magazine extends Document
         return $this->numero;
     }
 
-    public function estDisponible()
-    {
-        return $this->disponible;
-    }
-
-    public function emprunter()
-    {
-        $this->disponible = false;
-    }
-
     public function getDescription()
     {
         echo "[Magazine] " . $this->titre . " -- " . $this->auteur . " (" . $this->prix . ") " . " | N°" . $this->numero. "\n";
@@ -36,5 +26,6 @@ class Magazine extends Document
 
 $m = new Magazine('Nat. Geographic', 'NGS', 5.99, 312);
 $m->getDescription();
+
 $m->emprunter();
 var_dump($m->estDisponible());
